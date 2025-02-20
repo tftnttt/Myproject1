@@ -10,7 +10,10 @@ const PORT = process.env.PORT || 3000;
 // Разрешаем CORS
 app.use(cors());
 
-// Подключение к MongoDB (используй переменную окружения!)
+// Включаем обработку JSON в запросах
+app.use(express.json());
+
+// Подключение к MongoDB
 const MONGO_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/mydatabase";
 
 mongoose.connect(MONGO_URI, {
@@ -18,13 +21,17 @@ mongoose.connect(MONGO_URI, {
     useUnifiedTopology: true,
 })
 .then(() => console.log("✅ MongoDB подключена"))
-.catch(err => console.log("❌ Ошибка подключения к MongoDB:", err));
+.catch(err => {
+    console.error("❌ Ошибка подключения к MongoDB:", err);
+    process.exit(1); // Завершаем процесс, если база не подключилась
+});
 
-// Маршруты
+// Основной маршрут
 app.get("/", (req, res) => {
     res.send("Backend работает!");
 });
 
+// Пример API-маршрута
 app.get("/api/data", (req, res) => {
     res.json({ message: "Это API ответ", status: "success" });
 });
