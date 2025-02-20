@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 require("dotenv").config(); // Загружаем переменные окружения
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 25512;
 
 // Разрешаем CORS
 app.use(cors());
