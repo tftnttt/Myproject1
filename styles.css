@@ -1,0 +1,516 @@
+/* Общие стили */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Основное содержимое */
+main {
+    flex: 1;
+}
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    background: white;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Ставим вправо */
+    padding: 0 20px;
+    font-size: 14px;
+    z-index: 1050;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+/* Контейнер для геолокации */
+.ubicacion-container {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Отступ между текстом и городом */
+	margin-right: auto; /* Двигаем влево */
+    padding-left: 1690px; /* Можно подкорректировать */
+}
+
+#ubicacion {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+/* Когда скрываем топ-бар */
+.top-bar-hidden {
+    transform: translateY(-100%); /* Сдвигаем вверх */
+    opacity: 0;
+}
+
+/* Когда шапка зафиксирована */
+.header-fixed {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: top 0.3s ease-in-out;
+}
+
+
+
+/* Стили для модального окна */
+#modal-ubicacion {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed;
+    z-index: 1100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон */
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Список городов */
+#city-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0;
+}
+
+#city-list li {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+}
+
+#city-list li:hover {
+    background: #f1f1f1;
+}
+
+
+/* Шапка */
+header {
+    position: fixed;
+    width: 98%;
+    top: 30px; /* Учитывает высоту топ-бара */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 100px;
+    background: linear-gradient(135deg, #00c9ff, #a3e3ff, #fb7185);
+    box-sizing: border-box;
+    border-radius: 0 0 20px 20px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+	user-select: none; /* Запрещает выделение */
+    pointer-events: auto; /* Проверяет, чтобы клики работали */
+}
+
+/* Класс для прилипания шапки */
+.header-fixed {
+    top: 0 !important;
+}
+
+
+/* Контейнер поиска */
+.search-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.search {
+    width: 900px; /* Измени ширину */
+    height: 25px; /* Добавь высоту */
+    padding: 12px; /* Подгони отступы, если нужно */
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+    text-align: left;
+}
+
+
+.search:focus {
+    box-shadow: 0 0 7px rgba(211, 47, 47, 0.5);
+}
+/* Контейнер иконок в шапке */
+.header-icons {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    padding: 10px;
+}
+
+.icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.header-icons a img {
+    width: 32px;
+    height: 32px;
+    transition: transform 0.3s ease;
+}
+
+.icon span {
+    font-size: 14px;
+    color: white;
+    margin-top: 5px;
+}
+
+/* Эффект при наведении */
+.icon a:hover img {
+    transform: scale(1.1);
+}
+
+/* Иконки категорий */
+.dropdown-wrapper {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.icon-toggle {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.icon-toggle img {
+    width: 60px;
+    height: 40px;
+    transition: transform 0.3s ease;
+}
+
+.icon-toggle.active img {
+    transform: rotate(180deg);
+}
+
+/* Категории */
+.category-icons {
+    display: flex;
+    gap: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-10px);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out, visibility 0.4s;
+}
+
+.category-icons.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.category-icons.closing {
+    transform: translateY(-10px);
+    opacity: 0;
+}
+
+.category-icons.hidden {
+    visibility: hidden;
+}
+
+/* Иконки */
+.category-icons a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.category-icons a span {
+    margin-top: 8px; /* Увеличь значение, если нужно сильнее опустить */
+}
+
+.category-icons img {
+    width: 50px;
+    height: 50px;
+    transition: transform 0.3s;
+}
+
+.category-icons a:hover img {
+    transform: scale(1.1);
+}
+
+/* Логотип */
+.logo {
+    width: 15%;
+    display: flex;
+    align-items: center;
+    padding-left: 180px;
+
+}
+
+.logo img {
+    width: 80%;
+    max-width: 220px;
+    height: auto;
+}
+
+/* Меню */
+.menu-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: -13px;
+    cursor: pointer;
+}
+
+.menu-icon img {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.3s ease;
+}
+
+.menu-icon:hover img {
+    transform: scale(1.1);
+}
+
+/* Меню категорий */
+.category-menu {
+    max-height: 740px;
+    overflow-y: auto;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    position: absolute;
+    top: 113px;
+    left: -300px;
+    width: 200px;
+    height: 100vh;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: left 0.4s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s;
+}
+
+.category-menu.active {
+    left: 0;
+    opacity: 1;
+    visibility: visible;
+}
+
+.category-menu.closing {
+    left: -300px;
+    opacity: 0;
+}
+
+.category-menu.hidden {
+    visibility: hidden;
+}
+
+/* Скроллбар */
+.category-menu::-webkit-scrollbar {
+    width: 8px;
+}
+
+.category-menu::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.category-menu::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #00c9ff, #fb7185);
+}
+
+.category-menu::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, #0099cc, #ff4b2b);
+}
+
+.category-menu {
+    scrollbar-width: thin;
+    scrollbar-color: #00c9ff #f1f1f1;
+}
+
+/* Список категорий */
+.category-menu li a {
+    display: block;
+    padding: 10px 8px;
+    background: rgba(255, 255, 255, 0.2);
+    color: #333;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    text-align: left;
+    transition: background 0.3s, transform 0.2s, color 0.3s;
+    backdrop-filter: blur(10px);
+}
+
+.category-menu li a:hover {
+    background: rgba(255, 255, 255, 0.3);
+    color: #007bff;
+    transform: scale(1.05);
+}
+.category-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+/* Слайд-шоу */
+.slideshow {
+    width: 110%;
+    margin: 50px auto;
+    overflow: hidden;
+    position: relative;
+    max-width: 1200px;
+    height: 200px;
+    padding-top: 210px;
+	user-select: none; /* Запрещает выделение */
+}
+
+.slides {
+    display: flex;
+    width: 100%;
+    transition: transform 1s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    box-sizing: border-box;
+}
+
+.slide img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.slide:first-child {
+    opacity: 1;
+}
+
+/* Подвал */
+footer {
+    background: white;
+    color: black;
+    text-align: center;
+    padding: 10px;
+    margin-top: auto;
+}
+
+/* Карточки товаров */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+	user-select: none; /* Запрещает выделение */
+}
+
+.product-card {
+    width: 100%;
+    max-width: 280px;
+    height: 400px;
+    background: white;
+    padding: 15px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.product-card h3 {
+    font-size: 16px;
+    margin: 5px 0;
+    text-align: left;
+}
+
+.product-card .store-name {
+    font-size: 14px;
+    color: #777;
+    text-align: left;
+}
+
+.product-card .rating {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    font-size: 14px;
+    color: #ffcc00;
+}
+
+.product-card .rating i {
+    margin-right: 3px;
+}
+
+.product-card p {
+    font-size: 16px;
+    font-weight: bold;
+    color: #d32f2f;
+    text-align: left;
+}
+
+.product-card button {
+    background-color: #ff3b6f;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.product-card button:hover {
+    background-color: #e63264;
+}
+
+.product-card:hover {
+    transform: scale(1.03);
+}

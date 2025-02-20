@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MALINA MARKET</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <!-- Шапка сайта -->
+
+<div class="top-bar">
+    <div class="ubicacion-container">
+        <span></span>
+        <span id="ubicacion" class="clickable">Seleccionar ciudad</span>
+    </div>
+</div>
+
+
+<!-- Модальное окно -->
+<div id="modal-ubicacion">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3>Selecciona tu ciudad</h3>
+        <ul id="city-list">
+            <li data-city="La Paz">La Paz</li>
+            <li data-city="Santa Cruz">Santa Cruz</li>
+            <li data-city="Cochabamba">Cochabamba</li>
+            <li data-city="Sucre">Sucre</li>
+            <li data-city="Tarija">Tarija</li>
+            <li data-city="Potosí">Potosí</li>
+            <li data-city="Oruro">Oruro</li>
+            <li data-city="Trinidad">Trinidad</li>
+            <li data-city="Cobija">Cobija</li>
+        </ul>
+    </div>
+</div>
+
+
+
+<header>
+    <div class="logo">
+        <img src="img/logo.png" alt="MALINA MARKET">
+    </div>
+	    <div class="menu-icon">
+        <a href="#">
+            <img src="img/menu.png" alt="Menu">
+        </a>
+    </div>
+	<nav class="category-menu" id="category-menu">
+    <ul>
+<li><a href="#">Moda</a></li>
+<li><a href="#">Electrónica</a></li>
+<li><a href="#">Hogar y Cocina</a></li>
+<li><a href="#">Deportes y Aire Libre</a></li>
+<li><a href="#">Belleza y Cuidado Personal</a></li>
+<li><a href="#">Juguetes y Juegos</a></li>
+<li><a href="#">Salud y Bienestar</a></li>
+<li><a href="#">Automóviles y Motos</a></li>
+<li><a href="#">Oficina y Papelería</a></li>
+<li><a href="#">Alimentos y Bebidas</a></li>
+<li><a href="#">Relojes y Joyería</a></li>
+<li><a href="#">Bolsos y Accesorios</a></li>
+<li><a href="#">Electrodomésticos</a></li>
+<li><a href="#">Libros y Papelería</a></li>
+<li><a href="#">Jardinería</a></li>
+<li><a href="#">Instrumentos Musicales</a></li>
+<li><a href="#">Bebés y Maternidad</a></li>
+<li><a href="#">Videojuegos y Consolas</a></li>
+<li><a href="#">Mascotas y Accesorios</a></li>
+<li><a href="#">Arte y Manualidades</a></li>
+
+    </ul>
+</nav>
+
+
+  <!-- Контейнер поиска -->
+    <div class="search-container">
+        <input type="text" class="search" placeholder="Buscar...">
+    </div>
+
+    <!-- Блок с иконками и стрелкой -->
+    <div class="dropdown-wrapper">
+        <div class="icon-toggle" id="toggle-arrow">
+            <img src="img/arrowDown.png" alt="Mostrar categorías">
+        </div>
+        
+        <div class="category-icons" id="category-icons">
+            <a href="#"><img src="img/auto.png" alt="Moda"><span>Auto</span></a>
+            <a href="#"><img src="img/electronics.png" alt="Electrónica"><span>Electrónica</span></a>
+            <a href="#"><img src="img/home.png" alt="Hogar y Cocina"><span>Hogar y Cocina</span></a>
+            <a href="#"><img src="img/dressManGirl.png" alt="Deportes"><span>Moda</span></a>
+        </div>
+    </div>
+
+    <div class="header-icons">
+        <div class="icon">
+            <a href="address.html">
+                <img src="img/address.png" alt="Dirección">
+            </a>
+            <span>Dirección</span>
+        </div>
+        <div class="icon">
+            <a href="login.html">
+                <img src="img/login.png" alt="Iniciar sesión">
+            </a>
+            <span>Iniciar sesión</span>
+        </div>
+        <div class="icon">
+            <a href="cart.html">
+                <img src="img/cart.png" alt="Carrito">
+            </a>
+            <span>Carrito</span>
+        </div>
+    </div>
+</header>
+
+
+
+
+<main>
+
+
+
+    <!-- Слайд-шоу -->
+    <section class="slideshow">
+        <div class="slides">
+            <div class="slide"><img src="img/showcocina.jpg" alt="Slide 1"></div>
+            <div class="slide"><img src="img/showbadroom.jpg" alt="Slide 2"></div>
+            <div class="slide"><img src="img/showautoshell.jpg" alt="Slide 3"></div>
+        </div>
+    </section>
+<!-- Карточки товаров -->
+<div class="product-grid">
+    <div class="product-card">
+        <a href="product.html?id=1&name=Smartphone&price=999.00&image=img/product1.jpg">
+            <img src="img/product1.jpg" alt="Smartphone">
+            <h3>Smartphone</h3>
+            <div class="store-name">Tienda: <span>ElectroShop</span></div>
+            <div class="rating">⭐⭐⭐⭐⭐ (4.7)</div>
+            <p>999 bs</p>
+            <button>Al carrito</button>
+        </a>
+    </div>
+
+    <div class="product-card">
+        <a href="product.html?id=2&name=Laptop&price=2999.00&image=img/product2.jpg">
+            <img src="img/product2.jpg" alt="Laptop">
+            <h3>Laptop Gamer</h3>
+            <div class="store-name">Tienda: <span>TechWorld</span></div>
+            <div class="rating">⭐⭐⭐⭐ (4.5)</div>
+            <p>2999 bs</p>
+            <button>Al carrito</button>
+        </a>
+    </div>
+
+    <div class="product-card">
+        <a href="product.html?id=3&name=Smartwatch&price=499.00&image=img/product3.jpg">
+            <img src="img/product3.jpg" alt="Smartwatch">
+            <h3>Smartwatch</h3>
+            <div class="store-name">Tienda: <span>GadgetZone</span></div>
+            <div class="rating">⭐⭐⭐⭐⭐ (4.8)</div>
+            <p>499 bs</p>
+            <button>Al carrito</button>
+        </a>
+    </div>
+
+    <div class="product-card">
+        <a href="product.html?id=4&name=Headphones&price=199.00&image=img/product4.jpg">
+            <img src="img/product4.jpg" alt="Headphones">
+            <h3>Headphones Bluetooth</h3>
+            <div class="store-name">Tienda: <span>AudioMax</span></div>
+            <div class="rating">⭐⭐⭐⭐ (4.6)</div>
+            <p>199 bs</p>
+            <button>Al carrito</button>
+        </a>
+    </div>
+
+    <div class="product-card">
+        <a href="product.html?id=5&name=Camera&price=1499.00&image=img/product5.jpg">
+            <img src="img/product5.jpg" alt="Camera">
+            <h3>Cámara Profesional</h3>
+            <div class="store-name">Tienda: <span>FotoTech</span></div>
+            <div class="rating">⭐⭐⭐⭐⭐ (4.9)</div>
+            <p>1499 bs</p>
+            <button>Al carrito</button>
+        </a>
+    </div>
+
+    <div class="product-card">
+        <a href="product.html?id=6&name=Tablet&price=799.00&image=img/product6.jpg">
+            <img src="img/product6.jpg" alt="Tablet">
+            <h3>Tablet 10”</h3>
+            <div class="store-name">Tienda: <span>DigitalStore</span></div>
+            <div class="rating">⭐⭐⭐⭐ (4.7)</div>
+            <p>799 bs</p>
+            <button>Al carrito</button>
+        </a>
+    </div>
+
+    <div class="product-card">
+        <a href="product.html?id=7&name=Mouse&price=99.00&image=img/product7.jpg">
+            <img src="img/product7.jpg" alt="Mouse">
+            <h3>Mouse Inalámbrico</h3>
+            <div class="store-name">Tienda: <span>CompuCenter</span></div>
+            <div class="rating">⭐⭐⭐⭐⭐ (4.5)</div>
+            <p>99 bs</p>
+            <button>Al carrito</button>
+        </a>
+    </div>
+
+
+    <div class="product-card">
+        <a href="product.html?id=25&name=Producto 25&price=230.00&image=img/product25.jpg">
+            <img src="img/product25.jpg" alt="Reloj">
+    <h3>Reloj</h3>
+    <div class="store-name">Tienda: <span>BestSeller</span></div>
+    <div class="rating">
+        ⭐⭐⭐⭐⭐ (4.8)
+    </div>
+    <p>260 bs </p>
+    <button>Al carrito</button>
+</div>
+</section>
+
+
+</main>
+    <!-- Подвал с авторскими правами -->
+    <footer>
+        <p>&copy; 2025 MALINA MARKET - Todos los derechos reservados.</p>
+        <p>Contacto: info@malinamarket.com</p>
+    </footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const ubicacion = document.getElementById("ubicacion");
+    const modal = document.getElementById("modal-ubicacion");
+    const closeModal = document.querySelector(".close");
+    const cityList = document.getElementById("city-list");
+
+    // Открытие модального окна
+    ubicacion.addEventListener("click", function () {
+        modal.style.display = "flex";
+    });
+
+    // Закрытие окна при нажатии на "X"
+    closeModal.addEventListener("click", function () {
+        modal.style.display = "none";
+    });
+
+    // Выбор города
+    cityList.addEventListener("click", function (event) {
+        if (event.target.tagName === "LI") {
+            const selectedCity = event.target.getAttribute("data-city");
+            ubicacion.textContent = selectedCity;
+            modal.style.display = "none"; // Закрываем модальное окно
+        }
+    });
+
+    // Закрытие окна при клике вне области
+    window.addEventListener("click", function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    let header = document.querySelector("header");
+    let topBar = document.querySelector(".top-bar");
+    let lastScrollTop = 0;
+    let topBarHeight = topBar.offsetHeight; // Высота топ-бара
+
+    window.addEventListener("scroll", function () {
+        let scrollTop = window.scrollY;
+
+        if (scrollTop > topBarHeight) {
+            // Если скроллим вниз и опустились ниже топ-бара -> скрываем его
+            topBar.classList.add("top-bar-hidden");
+            header.classList.add("header-fixed");
+        } else if (scrollTop === 0) {
+            // Показываем топ-бар только если вернулись в самый верх (ПЛАВНО)
+            topBar.classList.remove("top-bar-hidden");
+            header.classList.remove("header-fixed");
+        }
+
+        lastScrollTop = scrollTop;
+    });
+});
+
+
+</script>
+</body>
+</html>
