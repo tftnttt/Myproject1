@@ -15,8 +15,7 @@
     "mongodb": "^6.13.0",
     "mongoose": "^8.10.1"
   }
-  "scripts": {
-  "start": "node server.js" // или index.js, в зависимости от твоего файла
-}
+
+
 
 }
