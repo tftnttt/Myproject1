@@ -1,20 +1,22 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+require("dotenv").config(); // Загружаем переменные окружения
 
 const app = express();
-
-// Используем порт от Railway или 3000 локально
 const PORT = process.env.PORT || 3000;
 
 // Разрешаем CORS
 app.use(cors());
+app.use(express.json()); // Обрабатываем JSON-запросы
 
-// Включаем обработку JSON в запросах
-app.use(express.json());
+// Подключение к MongoDB Atlas
+const MONGO_URI = process.env.MONGODB_URI; 
 
-// Подключение к MongoDB
-const MONGO_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/mydatabase";
+if (!MONGO_URI) {
+    console.error("❌ Ошибка: переменная MONGODB_URI не задана!");
+    process.exit(1);
+}
 
 mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
@@ -23,7 +25,7 @@ mongoose.connect(MONGO_URI, {
 .then(() => console.log("✅ MongoDB подключена"))
 .catch(err => {
     console.error("❌ Ошибка подключения к MongoDB:", err);
-    process.exit(1); // Завершаем процесс, если база не подключилась
+    process.exit(1);
 });
 
 // Основной маршрут
@@ -31,7 +33,7 @@ app.get("/", (req, res) => {
     res.send("Backend работает!");
 });
 
-// Пример API-маршрута
+// API-маршрут
 app.get("/api/data", (req, res) => {
     res.json({ message: "Это API ответ", status: "success" });
 });
