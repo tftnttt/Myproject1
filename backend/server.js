@@ -14,7 +14,7 @@ app.use(express.json()); // Обрабатываем JSON-запросы
 const MONGO_URI = process.env.MONGODB_URI; 
 
 if (!MONGO_URI) {
-    console.error("❌ Ошибка: переменная MONGODB_URI не задана!");
+    console.error(" Ошибка: переменная MONGODB_URI не задана!");
     process.exit(1);
 }
 
@@ -22,9 +22,9 @@ mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
-.then(() => console.log("✅ MongoDB подключена"))
+.then(() => console.log(" MongoDB подключена"))
 .catch(err => {
-    console.error("❌ Ошибка подключения к MongoDB:", err);
+    console.error(" Ошибка подключения к MongoDB:", err);
     process.exit(1);
 });
 
@@ -40,5 +40,5 @@ app.get("/api/data", (req, res) => {
 
 // Запуск сервера
 app.listen(PORT, () => {
-    console.log(`🚀 Сервер запущен на порту ${PORT}`);
+    console.log(` Сервер запущен на порту ${PORT}`);
 });
