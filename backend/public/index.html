@@ -36,6 +36,31 @@
         </ul>
     </div>
 </div>
+<!-- Модальное окно входа -->
+<div id="modal-login" class="modal">
+    <div class="modal-content">
+        <span class="close close-modal">&times;</span>
+        <h3>Iniciar sesión</h3>
+        <input type="text" id="login-username" placeholder="Usuario">
+        <input type="password" id="login-password" placeholder="Contraseña">
+        <button id="btn-login">Entrar</button>
+        <p class="switch-to-register">¿No tienes cuenta? <span id="open-register">Regístrate</span></p>
+    </div>
+</div>
+
+<!-- Модальное окно регистрации -->
+<div id="modal-register" class="modal">
+    <div class="modal-content">
+        <span class="close close-modal">&times;</span>
+        <h3>Registro</h3>
+        <input type="text" id="register-name" placeholder="Nombre">
+        <input type="email" id="register-email" placeholder="Correo electrónico">
+        <input type="text" id="register-phone" placeholder="Teléfono">
+        <input type="date" id="register-birth">
+        <input type="password" id="register-password" placeholder="Contraseña">
+        <button id="btn-register">Registrar</button>
+    </div>
+</div>
 
 
 
@@ -101,12 +126,13 @@
             </a>
             <span>Dirección</span>
         </div>
-        <div class="icon">
-            <a href="login.html">
-                <img src="img/login.png" alt="Iniciar sesión">
-            </a>
-            <span>Iniciar sesión</span>
-        </div>
+<div class="icon">
+    <a href="#" id="open-login">
+        <img src="img/login.png" alt="Iniciar sesión">
+    </a>
+    <span>Iniciar sesión</span>
+</div>
+
         <div class="icon">
             <a href="cart.html">
                 <img src="img/cart.png" alt="Carrito">

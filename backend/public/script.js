@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let slides = document.querySelector(".slides");
     let totalSlides = document.querySelectorAll(".slide").length;
     let currentIndex = 0;
-    const slideInterval = 5000; // 5 секунд
+    const slideInterval = 5000;
 
     function nextSlide() {
         if (!slides) return;
@@ -14,26 +14,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     setInterval(nextSlide, slideInterval);
 
-    // === Анимация для иконок категорий ===
-    let categoryIcons = document.querySelectorAll(".category-icons img");
-    categoryIcons.forEach(icon => {
-        icon.addEventListener("mouseenter", function () {
-            this.style.transform = "scale(1.1)";
-            this.style.transition = "transform 0.3s ease";
-        });
-        icon.addEventListener("mouseleave", function () {
-            this.style.transform = "scale(1)";
-        });
-    });
-
-    // === Меню категорий (фикс скролла вверх) ===
+    // === Меню категорий ===
     let menuIcon = document.querySelector(".menu-icon");
     let categoryMenu = document.getElementById("category-menu");
 
     if (menuIcon && categoryMenu) {
         menuIcon.addEventListener("click", function (event) {
-            event.preventDefault(); 
-            event.stopPropagation(); 
+            event.preventDefault();
             categoryMenu.classList.toggle("active");
         });
 
@@ -50,80 +37,113 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (toggleArrow && categoryIconsContainer) {
         toggleArrow.addEventListener("click", function (event) {
-            event.preventDefault(); 
+            event.preventDefault();
             categoryIconsContainer.classList.toggle("active");
             toggleArrow.classList.toggle("active");
         });
     }
 
-    // === ГЕОЛОКАЦИЯ ЧЕРЕЗ БРАУЗЕР (Geolocation API) ===
+    // === ГЕОЛОКАЦИЯ ===
     let ubicacionElemento = document.getElementById("ubicacion");
-    if (!ubicacionElemento) return;
+    if (ubicacionElemento && navigator.geolocation) {
+        ubicacionElemento.textContent = "Tu ciudad";
 
-    if (!navigator.geolocation) {
-        console.log(" Geolocalización no soportada por el navegador");
-        ubicacionElemento.textContent = "Geolocalización no soportada";
-        return;
+        navigator.geolocation.getCurrentPosition(
+            async function (position) {
+                let lat = position.coords.latitude;
+                let lon = position.coords.longitude;
+
+                try {
+                    const response = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&accept-language=es`);
+                    const data = await response.json();
+                    let ciudad = data.address?.city || data.address?.town || data.address?.village || "Tu ciudad";
+                    ubicacionElemento.textContent = ciudad;
+                } catch (error) {
+                    ubicacionElemento.textContent = "Error al obtener ubicación";
+                }
+            },
+            function () {
+                ubicacionElemento.textContent = "Ubicación no disponible";
+            }
+        );
     }
 
-    ubicacionElemento.textContent = "Tu ciudad";
-
-    navigator.geolocation.getCurrentPosition(
-        async function (position) {
-            let lat = position.coords.latitude;
-            let lon = position.coords.longitude;
-
-            console.log(" Coordenadas obtenidas:", lat, lon);
-
-            try {
-                const response = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&accept-language=es`);
-                const data = await response.json();
-                console.log(" Datos recibidos:", data);
-
-                let ciudad = data.address.city || data.address.town || data.address.village || "Tu ciudad";
-                ubicacionElemento.textContent = ciudad;
-            } catch (error) {
-                console.error(" Error al obtener la ciudad:", error);
-                ubicacionElemento.textContent = "Error al obtener ubicación";
-            }
-        },
-        function (error) {
-            console.error(" Error de geolocalización:", error);
-            let mensaje = "Ubicación no disponible";
-            if (error.code === 1) mensaje = "Tu ciudad";
-            if (error.code === 2) mensaje = "Tu ciudad";
-            if (error.code === 3) mensaje = "Tu ciudad";
-            ubicacionElemento.textContent = mensaje;
-        }
-    );
-
     // === ЗАГРУЗКА ТОВАРОВ ===
-    fetch("https://myproject1-55yu.onrender.com/api/products") // ЗАПРОС НА СЕРВЕР
-        .then(response => {
-            if (!response.ok) throw new Error(`Ошибка сервера: ${response.status}`);
-            return response.json();
-        })
+    fetch("https://myproject1-55yu.onrender.com/api/products")
+        .then(response => response.json())
         .then(products => {
-            console.log(" Datos recibidos:", products);
             const container = document.getElementById("products-container");
             if (!container) return;
-
-            container.innerHTML = ""; // Очистка перед загрузкой
-
+            container.innerHTML = "";
             products.forEach(product => {
                 const productElement = document.createElement("div");
                 productElement.classList.add("product-card");
-
                 productElement.innerHTML = `
                     <h2>${product.name}</h2>
                     <p>${product.description}</p>
-                    <p>Цена: $${product.price}</p>
+                    <p>Precio: $${product.price}</p>
                     <img src="${product.image_url}" alt="${product.name}" width="150">
                     <hr>
                 `;
-
                 container.appendChild(productElement);
             });
         })
-        .catch(error => console.error(" Ошибка загрузки товаров:", error));
+        .catch(() => console.error("❌ Ошибка загрузки товаров"));
+
+    // === МОДАЛЬНЫЕ ОКНА (ВХОД И РЕГИСТРАЦИЯ) ===
+    const openLoginButton = document.getElementById("open-login");
+    const modalLogin = document.getElementById("modal-login");
+    const modalRegister = document.getElementById("modal-register");
+    const closeLogin = modalLogin?.querySelector(".close");
+    const closeRegister = modalRegister?.querySelector(".close");
+    const openRegisterButton = document.getElementById("open-register");
+
+    function openModal(modal) {
+        closeAllModals();
+        if (modal) {
+            modal.style.display = "flex";
+        }
+    }
+
+    function closeModal(modal) {
+        if (modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    function closeAllModals() {
+        closeModal(modalLogin);
+        closeModal(modalRegister);
+    }
+
+    // Открытие окна входа
+    openLoginButton?.addEventListener("click", function (event) {
+        event.preventDefault();
+        openModal(modalLogin);
+    });
+
+    // Переключение на регистрацию
+    openRegisterButton?.addEventListener("click", function () {
+        closeModal(modalLogin);
+        openModal(modalRegister);
+    });
+
+    // Закрытие окон по кнопке "X"
+    closeLogin?.addEventListener("click", function () {
+        closeModal(modalLogin);
+    });
+
+    closeRegister?.addEventListener("click", function () {
+        closeModal(modalRegister);
+    });
+
+    // Закрытие окон при клике вне их области
+    window.addEventListener("click", function (event) {
+        if (event.target === modalLogin) {
+            closeModal(modalLogin);
+        }
+        if (event.target === modalRegister) {
+            closeModal(modalRegister);
+        }
+    });
 });
