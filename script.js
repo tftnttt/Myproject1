@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
     // === ЗАГРУЗКА ТОВАРОВ ===
-    fetch("https://myproject1-55yu.onrender.com") //  ЗАПРОС НА СЕРВЕР
+    fetch("https://myproject1-55yu.onrender.com/api/products") // ЗАПРОС НА СЕРВЕР
         .then(response => {
             if (!response.ok) throw new Error(`Ошибка сервера: ${response.status}`);
             return response.json();
